@@ -1,3 +1,4 @@
+import NaoEncontrado from "../erros/NaoEncontrado.js";
 import { autor } from "../models/Autor.js";
 
 class AutorController {
@@ -18,7 +19,7 @@ class AutorController {
             if (autorEncontrado !== null) {
                 res.status(200).send(autorEncontrado);
             } else {
-                res.status(404).json({ message: "ID do Autor não localizado." });
+                next(new NaoEncontrado("ID do Autor não localizado."));
             }
         } catch(erro) {
             next(erro); // o next vai mandar o erro para o tratamento de erros
